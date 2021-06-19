@@ -14,6 +14,7 @@ if(process.argv[2] == null) {
 }
 
 const instruments = new Map()
+
 instruments.set("piano", "ti-ta-ti")
 instruments.set("trumpet", "pouet")
 instruments.set("flute", "trulu")
@@ -48,6 +49,5 @@ function Musician(instrument) {
 	setInterval(this.update.bind(this), 1000);
 	
 }
-		
 		
 		
