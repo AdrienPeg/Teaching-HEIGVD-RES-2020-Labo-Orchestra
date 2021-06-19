@@ -1,0 +1,15 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "musician.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adrien Peguiron",
+  "license": "ISC",
+  "dependencies": {
+    "date-and-time": "^1.0.1",
+    "uuidv4": "^6.2.10"
+  }
+}
