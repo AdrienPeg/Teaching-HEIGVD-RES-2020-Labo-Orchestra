@@ -106,11 +106,11 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
 | | *Insert your diagram here...* |
 |Question | Who is going to **send UDP datagrams** and **when**? |
-| | *Enter your response here...* |
+| | Each musician will send an UDP datagram every second. |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
 | | *Enter your response here...* |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | *Enter your response here...* |
+| | The payload must contain a list of musician. For each musician, his instrument, uuid and the time when he started playing must be specified. |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
 | | *Enter your response here...* |
 
@@ -120,11 +120,11 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | *Enter your response here...*  |
+| | with the following command : `JSON.stringify(object)` |
 |Question | What is **npm**?  |
-| | *Enter your response here...*  |
+| | npm is the package manager for the Node JavaScript platform. It is **used** to publish, discover, install, and develop node programs. <br />Source : https://docs.npmjs.com/cli/v6/commands/npm |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | *Enter your response here...*  |
+| | `npm install` installs a package and any package that it depends on. Before npm 5, the --save flag was mandatory to add the package to `package.json`. On most recent versions, it is now done automatically. |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
 | | *Enter your response here...*  |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
