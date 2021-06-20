@@ -144,7 +144,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | How do we **define and build our own Docker image**?|
 | | With the command `docker build -t imageName .`this command must be run in the directory where the corresponding Dockerfile is stored. |
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?  |
-| | *Enter your response here...*  |
+| | `ENTRYPOINT` defines the first command that will be used upon launching the container. In our Dockerfiles, we use it to launch the `.js` apps with node. since the command will be used upfront, if we pass an argument while launching the container, it will be used for the command.  |
 |Question | After building our Docker image, how do we use it to **run containers**?  |
 | | Once the image has been built, use the following command : `docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`. A list of options can be found here : |
 |Question | How do we get the list of all **running containers**?  |
