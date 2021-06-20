@@ -28,7 +28,7 @@ function Musician(instrument) {
 	}
 	
 	const now = new Date();
-	date.format(now, 'YYYY/MM/DD HH:mm:ss')
+	date.format(now, 'DD/MM/YYYY HH:mm:ss')
 	
 	this.uuid = uuidv4();
 	
@@ -49,5 +49,5 @@ function Musician(instrument) {
 	setInterval(this.update.bind(this), 1000);
 	
 }
-		
-		
+
+new Musician(process.argv[2]);

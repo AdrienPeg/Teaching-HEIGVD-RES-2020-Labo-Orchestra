@@ -51,16 +51,14 @@ s.on('message', function(msg, source) {
     const jsonParsed = JSON.parse(msg);
     const uuidMusician = jsonParsed.uuid;
     // add musicians or update them
-    if (allMusicians.uuidMusician()){
-        allMusicians.set(uuidMusician, msg);
-    }else{
-        allMusicians.get(uuidMusician).push(msg);
-    }
+    allMusicians.set(uuidMusician, msg);
 });
 
 /*
 Interval to check if musicians are inactive for more than 5 seconds
- */
+ 
+*/
+/*
 setInterval(() => {
     allMusicians.forEach((value, key)=>{
         if (Date.now() - value.activeSince.getTime() > 5000){
@@ -68,17 +66,29 @@ setInterval(() => {
         }
     });
 }, 1000);
-
+*/
 /*
 Creation server TCP
 Write musicians
  */
 const net = require('net');
-const TCP_Server = net.createServer((socket) => {
+const TCP_Server = net.createServer();
+
+TCP_Server.on('listening', function(){
+	console.log("Server listening for connection requests on port : " + protocol.PROTOCOL_PORT_TCP);
+});
+
+TCP_Server.on('connection', function(socket){
     let musicianList = [];
     allMusicians.forEach((value, key) => {
-        musicianList.push({uuid: key, instrument: value.instrument, activeSince: value.activeSince});
+		if (moment(value.activeSince, "DD MM YYYY hh:mm:ss") >= moment().subtract(5, 'seconds')) {
+            musicianList.push({uuid: key, instrument: value.instrument, activeSince: value.activeSince});
+        } else { 
+            allMusicians.delete(key);
+        }
     });
+	
+	
     socket.write(JSON.stringify(musicianList, null, 2));
     socket.write("\n");
     socket.end();
