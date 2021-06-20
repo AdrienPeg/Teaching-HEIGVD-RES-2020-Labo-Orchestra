@@ -124,17 +124,17 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | What is **npm**?  |
 | | npm is the package manager for the Node JavaScript platform. It is **used** to publish, discover, install, and develop node programs. <br />Source : https://docs.npmjs.com/cli/v6/commands/npm |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | `npm install` installs a package and any package that it depends on. Before npm 5, the --save flag was mandatory to add the package to `package.json`. On most recent versions, it is now done automatically. |
+| | `npm install` installs a package and any package that it depends on. Before npm 5, the --save flag was mandatory to add the package to `package.json`. On more recent versions, it is now done automatically. |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
-| | *Enter your response here...*  |
+| | This website can be used to look for packages. There are also explanations on how to install and use every packages available. |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-| | *Enter your response here...*  |
+| | With the [uuid](https://www.npmjs.com/package/uuid) package. Once it is installed with the command `npm install uuid`, it can be used with these lines : <br />`const { v4: uuidv4 } = require('uuid');` <br /> `var uuid = uuidv4();` |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
-| | *Enter your response here...*  |
+| | With the function `setInterval(function, interval)`with `function`bein the function to execute and `interval` the number of milliseconds before executing `function` again. |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Enter your response here...*  |
+| | With the module `dgram`. First it must be initialized with the following lines : <br />`var dgram = require('dgram');` <br />`var s = dgram.createSocket('udp4');` <br />Then the socket can be used to send an UDP datagram on the desired address and port : <br /> `socket.send(msg[, offset, length][, port][, address][, callback])` |
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Enter your response here...*  |
+| | With `process.argv[N]`. If N = 0, it will return `Node`and if N = 1, it will return the name of the file. |
 
 
 ## Task 3: package the "musician" app in a Docker image
@@ -146,9 +146,9 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?  |
 | | *Enter your response here...*  |
 |Question | After building our Docker image, how do we use it to **run containers**?  |
-| | *Enter your response here...*  |
+| | Once the image has been built, use the following command : `docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`. A list of options can be found here : |
 |Question | How do we get the list of all **running containers**?  |
-| | *Enter your response here...*  |
+| | With the command `docker ps` |
 |Question | How do we **stop/kill** one running container?  |
 | | *Enter your response here...*  |
 |Question | How can we check that our running containers are effectively sending UDP datagrams?  |
