@@ -1,13 +1,4 @@
 /*
- This program simulates a "data collection autidor", which joins a multicast
- group in order to receive instruments published by musican.
- The instrument are transported in json payloads with the following format:
-   {"timestamp":1394656712850,"instrument":"kitchen"}
- Usage: to start the station, use the following command in a terminal
-   node auditor.js
-*/
-
-/*
  * We have defined the multicast address and port in a file, that can be imported.
  * The address and the port are part of our simple
  * application-level protocol
@@ -54,19 +45,6 @@ s.on('message', function(msg, source) {
     allMusicians.set(uuidMusician, msg);
 });
 
-/*
-Interval to check if musicians are inactive for more than 5 seconds
- 
-*/
-/*
-setInterval(() => {
-    allMusicians.forEach((value, key)=>{
-        if (Date.now() - value.activeSince.getTime() > 5000){
-            allMusicians.delete(key);
-        }
-    });
-}, 1000);
-*/
 /*
 Creation server TCP
 Write musicians

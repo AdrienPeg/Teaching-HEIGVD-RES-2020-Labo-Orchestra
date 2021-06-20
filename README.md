@@ -104,15 +104,15 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | --- | --- |
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
-| | *Insert your diagram here...* |
+| | ![diagram](images\diagram.png) |
 |Question | Who is going to **send UDP datagrams** and **when**? |
 | | Each musician will send an UDP datagram every second. |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-| | *Enter your response here...* |
+| | The Auditor is going to listen to the datagrams. When the datagram is received, the auditor must add the musician that sent the datagram to its list of musicians. If the musicians is already in the list, its last play time has to be changed. The auditors will kick the musicians if he didn't play for the last five seconds. |
 |Question | What **payload** should we put in the UDP datagrams? |
 | | The payload must contain a list of musician. For each musician, his instrument, uuid and the time when he started playing must be specified. |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | *Enter your response here...* |
+| | Senders and receivers need a map with the instruments and their sounds. Receiver need an array with all the musicians. We update the array when : <br />- Receiver receive a new datagram of a musician <br />- Receiver receive a datagram a musician that the last play time has changed. <br />- When a musician hasn't played for 5 seconds, we remove it from the array. We will query the array when we ask the auditor who's playing from the host. |
 
 
 ## Task 2: implement a "musician" Node.js application
@@ -160,15 +160,15 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | ---  |
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
-| | *Enter your response here...*  |
+| | We can add the IP source for multicast to the membership of de socket with its function addMembership(<IP multicast>) |
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**?  |
-| | *Enter your response here...* |
+| | We can use new Map() to crate a map. <br />We add the key and the value with set(key,value) function.<br />We get the value of a key with get(key) function. <br />We change the value of a key with get(key).push("newValue"). <br />We can delete a key with delete(key) function. <br />We can check if there is a key with has(key) function. |
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting?  |
-| | *Enter your response here...* |
+| | We can use the function moment(<number>, <format of time of the musician>).fromNow() And we can use it to see if the play is inactive since more than 5 seconds. |
 |Question | When and how do we **get rid of inactive players**?  |
-| | *Enter your response here...* |
+| | When there is a new connection to the TCP server, every musician will be checked to see if they have been active during the last 5 seconds. If it is not the case, they are removed from the musician list. |
 |Question | How do I implement a **simple TCP server** in Node.js?  |
-| | *Enter your response here...* |
+| | Sorry to almost copy past, put I don't how to explain it better.<br />Source : https://riptutorial.com/node-js/example/22405/a-simple-tcp-server <br />- We require Nodejs net module.<br/>const Net = require('net');<br/>- We have the port it listen to.<br/>const port = <PORT>;<br/>- The server listens to a socket for a client to make a connection request.<br/>server.listen(port, function() {<br/>    console.log(`Server listening for connection requests on socket localhost:${port}`.);<br/>});<br/>When a client requests a connection with the server, the server creates a new<br/>socket dedicated to that client.<br/>server.on('connection', function(socket) {<br/>    console.log('A new connection has been established.');<br/><br/>    // Now that a TCP connection has been established, the server can send data to<br/>    // the client by writing to its socket.<br/>    socket.write('Hello, client.');<br/><br/>    // The server can also receive data from the client by reading from its socket.<br/>    socket.on('data', function(chunk) {<br/>        console.log(`Data received from client: ${chunk.toString()`.});<br/>    });<br/><br/>    // When the client requests to end the TCP connection with the server, the server<br/>    // ends the connection.<br/>    socket.on('end', function() {<br/>        console.log('Closing connection with the client');<br/>    });<br/><br/>    // Don't forget to catch error, for your own sake.<br/>    socket.on('error', function(err) {<br/>        console.log(`Error: ${err}`);<br/>    });<br/>}); |
 
 
 ## Task 5: package the "auditor" app in a Docker image
@@ -176,7 +176,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we validate that the whole system works, once we have built our Docker image? |
-| | *Enter your response here...* |
+| | -We need to test that building the images of auditors and musicians with their instruments works.<br/>-We need to see if the tcp connection works between the auditor and the host work.<br/>it works if the host recieve something.<br/>-We need to see if the number data received is the number of musicians that played the last five seconds.<br />- The script validate.sh can also be used.<br /> |
 
 
 ## Constraints
